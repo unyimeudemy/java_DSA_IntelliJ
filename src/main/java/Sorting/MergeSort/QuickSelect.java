@@ -1,89 +1,46 @@
 package Sorting.MergeSort;
-
 import java.util.Arrays;
 
 public class QuickSelect {
-
     public static void main (String[] args){
-        int[] nums = {2, 1, 6, 3, 9};
-//        sort(nums, 0, nums.length - 1);
-        int K = findK(nums, 0, nums.length - 1);
-        System.out.println(K);
+        int[] arr = {2, 1, 6, 3, 0, 10};
+        int k = 1; // Example: Find the 3rd smallest element
+        int result = quickSelect(arr, 0, arr.length - 1, k - 1); // k-1 because arrays are zero-indexed
+        System.out.println("The " + k +  "th smallest element is: " + result);
 
     }
 
-    static void sort(int[] nums, int low, int high){
-        if(low >= high){
-            return;
-        }
-        int start = low;
-        int end = high;
-        int middle = low + (high - low)/2;
-        int pivot = nums[middle];
+    static int quickSelect(int[] arr, int low, int high, int k){
 
-        while(start <= end){
-            while(nums[start] < pivot){
-                start++;
-            }
-            while (nums[end] > pivot){
-                end--;
-            }
-            if(start <= end){
-                int temp = nums[start];
-                nums[start] = nums[end];
-                nums[end] = temp;
-                start++;
-                end--;
+        if(low <= high){
+            int partitionIndex = partition(arr, low, high);
+            if(partitionIndex == k){
+                return arr[partitionIndex];
+            } else if (partitionIndex > k) {
+                return quickSelect(arr, low, partitionIndex - 1, k);
+            }else{
+                return quickSelect(arr, partitionIndex + 1, high, k);
             }
         }
-        sort(nums, low, end);
-        sort(nums, start, high);
-    }
-
-    static int findK(int[] nums, int low, int high){
-        if(low >= high){
-            return -1;
-        }
-        int start = low;
-        int end = high;
-        int pivot = nums[1];
-
-        //at any point that the element that was chosen still retains its position,
-
-        while(start <= end){
-            while(nums[start] < pivot){
-                start++;
-            }
-            while (nums[end] > pivot){
-                end--;
-            }
-            if(start <= end){
-                int temp = nums[start];
-                nums[start] = nums[end];
-                nums[end] = temp;
-                start++;
-                end--;
-            }
-        }
-
-        if(indexOfElement(nums, pivot) == 1){
-            return pivot;
-        }
-
-        sort(nums, low, end);
-        sort(nums, start, high);
         return -1;
     }
 
-    static int indexOfElement(int[] arr, int target){
-        int i = 0;
-        while(arr[i] != target){
-            if(i >= arr.length - 1){
-                return  -1;
+    static int partition(int[] arr, int low, int high){
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j <= high; j++){
+            if(arr[j] < pivot){
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
-            i++;
         }
-        return i;
+
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        return i + 1;
     }
 
 }
