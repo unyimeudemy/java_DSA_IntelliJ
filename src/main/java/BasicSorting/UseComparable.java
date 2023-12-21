@@ -1,4 +1,4 @@
-package Sorting.MergeSort;
+package BasicSorting;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

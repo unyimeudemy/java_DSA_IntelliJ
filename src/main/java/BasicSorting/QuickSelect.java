@@ -1,4 +1,4 @@
-package Sorting.MergeSort;
+package BasicSorting;
 import java.util.Arrays;
 
 public class QuickSelect {

@@ -1,4 +1,4 @@
-package Sorting.MergeSort;
+package BasicSorting;
 
 public class QuickSort2 {
         public static void quickSort(int[] arr, int begin, int end) {
