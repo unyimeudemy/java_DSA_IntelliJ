@@ -17,6 +17,8 @@ public class MaximumHeap {
         myHeap.insert(7);
 
         System.out.println(arr);
+        myHeap.getMax();
+        System.out.println(arr);
     }
 
     public void insert(int numberToInsert){
@@ -31,6 +33,37 @@ public class MaximumHeap {
             indexOfNewElement = indexOfParent;
         }
     }
+
+    public int getMax(){
+        if(arr.size() == 0){
+            throw new IllegalStateException("Array is empty");
+        }
+        int max = arr.get(0);
+        int lastElement = arr.remove(arr.size() - 1);
+        arr.set(0, lastElement);
+        int indexOfMovedElement = 0;
+
+        while(true){
+            int leftChildIndex = 2 * indexOfMovedElement + 1;
+            int rightChildIndex = 2 * indexOfMovedElement + 2;
+
+            if(leftChildIndex >= arr.size()){
+                break;
+            }
+            int biggerChildIndex = leftChildIndex;
+            if(rightChildIndex < arr.size() && arr.get(rightChildIndex) > arr.get(leftChildIndex)){
+                biggerChildIndex = rightChildIndex;
+            }
+
+            if(arr.get(indexOfMovedElement) >= arr.get(biggerChildIndex)){
+                break;
+            }
+            swap(indexOfMovedElement, biggerChildIndex);
+            indexOfMovedElement = biggerChildIndex;
+        }
+        return max;
+    }
+
 
     private void swap(int first, int second){
         int valueAtFirst = arr.get(first);
