@@ -20,10 +20,12 @@ public class MinimumHeap {
         myHeap.insert(7);
 
         System.out.println(arr);
-        int min = myHeap.getMin();
-        System.out.println(arr);
-    }
+//        int min = myHeap.getMin();
+//        System.out.println("min: " + min + arr );
 
+        ArrayList<Integer> sortedList = myHeap.heapSort();
+        System.out.println(sortedList);
+    }
 
     public void insert(int numberToInsert){
         arr.add(numberToInsert);
@@ -38,12 +40,12 @@ public class MinimumHeap {
         }
     }
 
-
-
-
     public int getMin(){
         if(arr.size() == 0){
             throw new IllegalStateException("Heap is empty");
+        }
+        if(arr.size() == 1){
+            return arr.get(0);
         }
       int min = arr.get(0);
         int movedElement = arr.remove(arr.size() - 1);
@@ -72,12 +74,21 @@ public class MinimumHeap {
 
       return min;
     }
-////
-
 
     private void swap (int first, int second){
         int valueAtFirst = arr.get(first);
         arr.set(first, arr.get(second));
         arr.set(second, valueAtFirst);
+    }
+
+    private ArrayList<Integer> heapSort(){
+        ArrayList<Integer> sortedList = new ArrayList<>();
+
+        int size = arr.size();
+        for (int i = 0; i < size; i++){
+            sortedList.add(this.getMin());
+        }
+
+        return sortedList;
     }
 }
