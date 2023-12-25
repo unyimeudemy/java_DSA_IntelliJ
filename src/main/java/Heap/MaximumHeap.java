@@ -24,10 +24,13 @@ public class MaximumHeap {
     }
 
     public void insert(int numberToInsert){
+//        topFive(numberToInsert); // if you only wish to store
         arr.add(numberToInsert);
         int indexOfNewElement = arr.size() - 1;
         downHeap(indexOfNewElement);
     }
+
+
 
     public int getMax(){
         handleEmptyArray();
@@ -121,5 +124,14 @@ public class MaximumHeap {
         }
 
         return sortedList;
+    }
+
+    //stores top five elements from a stream of numbers
+    private void topFive(int numberToInsert){
+        if (numberToInsert > arr.get(arr.size() - 1)){
+            arr.remove(arr.get(arr.size() - 1));
+        }else{
+            return;
+        }
     }
 }
