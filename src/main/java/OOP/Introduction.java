@@ -15,9 +15,12 @@ public class Introduction {
 
 
 
-        Student newStudent2 = new Student();
-        newStudent2.score = 88.0434f;
-        System.out.println(newStudent2.score);
+//        Student newStudent2 = new Student();
+//        newStudent2.score = 88.0434f;
+//        System.out.println(newStudent2.score);
+
+        int a = 5;
+        System.out.println(a++ + ++a);
 
     }
 }
@@ -30,4 +33,6 @@ class Student{
 //        this.name = name;
 //        this.score = score;
 //    }
+
+
 }
