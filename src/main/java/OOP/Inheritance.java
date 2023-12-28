@@ -7,6 +7,8 @@ public class Inheritance {
         BoxWeight box3 = new BoxWeight();
         Box myBox = new BoxWeight();
         System.out.println(boxWeight.weight + ", " + boxWeight.h + ", " + box3.weight+ ", " + box2.h);
+        BoxWeight b = new BoxWeight();
+        b.getBox();
     }
 
 }
@@ -41,6 +43,10 @@ class Box {
         this.l = oldBox.l;
     }
 
+    static void getBox(){
+        System.out.println("this is from box ");
+    }
+
 }
 
 class BoxWeight extends Box{
@@ -73,5 +79,9 @@ class BoxWeight extends Box{
     public BoxWeight(int l, int w, int h){
 
     }
+
+//     static void getBox(){
+//        System.out.println("this is from box weight");
+//    }
 
 }
