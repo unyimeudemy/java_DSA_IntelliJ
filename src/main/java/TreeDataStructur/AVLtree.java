@@ -1,7 +1,5 @@
 package TreeDataStructur;
 
-
-
 public class AVLtree {
     public static void main(String[] args) {
         AVLtreeInner tree = new AVLtreeInner();
