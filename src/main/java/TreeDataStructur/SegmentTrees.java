@@ -13,7 +13,9 @@ public class SegmentTrees {
 class Segment{
     SegmentNode root;
     public Segment(int[] arr){
-        //create tree using the array
+        //Here we receive the array and make a call to the recursive function
+        // that does the actual building of tree,
+        //NOTE: here that the first element in the array is set as the root element
         this.root = constructTree(arr, 0, arr.length - 1);
     }
 
@@ -27,15 +29,29 @@ class Segment{
             return leaf;
         }
 
+        //create another node with the values of start and end, find the middle,
+        // go into the left and child section of the array by calling constructTree
+        //method of both halves.
         SegmentNode node = new SegmentNode(start, end);
         int mid = (start + end) / 2;
         node.left = this.constructTree(arr, start, mid);
         node.right = this.constructTree(arr, mid + 1, end);
+
+        //when both the left and right leaf children have been created and their
+        //values set, you pick up the values and sum up it up while emptying the
+        //stack.
         node.data = node.left.data + node.right.data;
+
+        // Then you return the node so that it will serve as either the left or right
+        // child of the node above ( parent ) where it was called.
         return node;
     }
 
     public int query(int qsi, int qei){
+        // Here we call a recursive function that runs on from the root
+        // of the tree to till it finds the nodes
+
+
         //qsi = query start index
         //qei = query end index
         return query( this.root, qsi, qei);
@@ -43,32 +59,48 @@ class Segment{
 
     private int query(SegmentNode node, int qsi, int qei){
         if(node.startInterval >= qsi && node.endInterval <= qei){
-            // this means that query is completely in the node
+            // this means that sum in the range we need is totally inside the node
+            // we are currently examining. So just return the node.
+            //NOTE: This is the point where the recursive call has reached the leaf node.
             return node.data;
         }else if(node.startInterval > qei || node.endInterval < qsi){
-            // This means that query is completely outside the range.
+            // This means that range query is completely outside the range that is
+            // in the current node we are examining.
             return 0;
         }else{
+            // If none the conditions above is met, make call to the left and right children
             return this.query(node.left, qsi, qei) + this.query(node.right, qsi, qei);
         }
     }
 
     public void update(int index, int value){
+        //NOTE that any update actually happens in the leaf node and the
+        // values of all nodes above the updated leaf node are updated.
+        // This way the last updated value is set to the value of root that is
+        // why we set the return value of the recursive method to the root data.
         this.root.data = update(root, index, value);
     }
 
     private int update(SegmentNode node, int index, int value){
         if(index >= node.startInterval && index <= node.endInterval){
+            //If the provided index is within the range that the current node holds
+            // perform the following operations.
             if(index == node.startInterval && index == node.endInterval){
+                //If we have reached the leaf node where both the values of start
+                // and end are the same, update the value of the node and return it
                 node.data = value;
                 return node.data;
             }else{
+                //Otherwise, go into the right and left child
                 int leftAns = update(node.left, index, value);
                 int rightAnc = update(node.right, index, value);
 
+                //While coming out from the recursive call into the right and
+                // left child, sum the children and return.
+                //This will continue till we reach the root node where the value returned will
+                // be set as data for root.
                 node.data = leftAns + rightAnc;
                 return  node.data;
-
             }
         }
         return  node.data;
