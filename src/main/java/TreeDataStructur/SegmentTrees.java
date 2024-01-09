@@ -150,5 +150,14 @@ class SegmentNode{
     public SegmentNode(int startInterval, int endInterval){
         this.startInterval = startInterval;
         this.endInterval = endInterval;
+
+        String j = "sdjof";
+        j.toString();
+
+
+        int[] arr = {2, 3, 3};
+        arr.toString();
     }
+
+
 }
