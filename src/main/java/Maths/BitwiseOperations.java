@@ -1,7 +1,6 @@
+package Maths;
 
-import java.util.ArrayList;
-
-public class Maths {
+public class BitwiseOperations {
 
     public static void main(String[] args) {
 //        int n = 23;
