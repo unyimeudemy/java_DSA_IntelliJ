@@ -1,5 +1,7 @@
 package Maths;
 
+import java.util.ArrayList;
+
 public class BasicMathsConcepts {
     public static void main(String[] args) {
 //        System.out.println(isPrime(10007));
@@ -7,8 +9,15 @@ public class BasicMathsConcepts {
 //         boolean[] primes = new boolean[n + 1];
 //        seive(n, primes);
 
-        System.out.println(squareRoot(20, 3));
+//        System.out.println(squareRoot(20, 3));
+
+//        factor(12);
+//        factorOptimized(36);
+//        System.out.println(hcf(6, 9));
+        System.out.println(lcm(4, 6));
     }
+
+
 
     static boolean isPrime(int num){
         double sqrt = Math.sqrt(num);
@@ -127,5 +136,72 @@ public class BasicMathsConcepts {
         }
 
         return root;
+    }
+
+    static void factor (int  n){
+        for(int i = 1; i <= n; i++){
+            if(n % i == 0) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+
+    static void factorOptimized(int n){
+        /*
+         * The brute method of getting the factors only loops
+         * the range between 1 and the number and then prints
+         * out those that divide without remainder.
+         *
+         * To optimise this, we stop the loop once we get to
+         * the root n because beyond this value, we will be
+         * doing repetition.
+         *
+         * Notice how the code handles duplicate for numbers with
+         * perfect roots and also how we push the bigger values
+         * into an array and print it out from the back in order to
+         * get a sorted array.
+         */
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= Math.sqrt(n); i++) {
+            if(n % i == 0){
+                if(n/i == i){
+                    System.out.print(i + " ");
+                }else{
+                    System.out.print(i + " ");
+                    list.add(n/i);
+                }
+            }
+        }
+
+        for (int i = list.size() - 1; i >=0 ; i--) {
+            System.out.print(list.get(i) + " ");
+        }
+
+    }
+
+    static int hcf(int a, int b){
+        /*
+         * The base case in this recursive method will be once the
+         * smaller number reaches 0 then the value of the bigger
+         * number is the HCF. This is because the HCF of any
+         * non-zero number and 0 is the absolute value of the
+         * number itself.
+         *
+         * Also notice that here that for each recursive call, we
+         * ensure that the argument that is passed in as a is the
+         * smallest which always the remainder that is gotten from
+         * dividing the bigger argument of the previous recursive
+         * from the smaller argument of the previous recursive call.
+         */
+        if(a == 0){
+            return b;
+        }
+        int atemp = b%a;
+        int btemp = a;
+        return hcf(atemp, btemp);
+    }
+
+    static int lcm(int a, int b){
+        return (a * b) / hcf(a, b);
     }
 }
