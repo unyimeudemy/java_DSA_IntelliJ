@@ -176,6 +176,32 @@ class DepthFirstPath{
     }
 }
 
+class ConnectedComponents{
+    private boolean[] marked;
+    private int[] id;
+    private int count;
+    public ConnectedComponents(Graph graph) {
+        marked = new boolean[graph.size()];
+        id = new int[graph.size()];
+        for (int v = 0; v < graph.size(); v++) {
+            if (!marked[v]) {
+                dfs(graph, v);
+                count++;
+            }
+        }
+    }
+    public int count() { return count; }
+    public int id(int v) { return id[v]; }
+    private void dfs(Graph G, int v) {
+        marked[v] = true;
+        id[v] = count;
+        for (int w : G.adj(v)){
+            if (!marked[w]) dfs(G, w);
+        }
+    }
+}
+
+
 class Graph{
     private final int V;
     private LinkedList<Integer>[] adj;
