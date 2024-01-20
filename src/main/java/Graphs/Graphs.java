@@ -6,7 +6,6 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class Graphs {
-
     public static void main(String[] args) {
         Graph myGraph = new Graph(8);
         myGraph.addEdge(0, 1);
@@ -177,6 +176,24 @@ class DepthFirstPath{
 }
 
 class ConnectedComponents{
+    /*
+     * Here we take the graph as argument and for each vertex
+     * on the graph that has not been marked meaning we do yet
+     * know which connected component it belongs to, we will
+     *  pick a count value and go into its linked list
+     * ( adjacent vertexes ). This is done be calling the dfs
+     * method recursively. Here in  this call, for each vertex on
+     *  the linked list that is not marked, we set the count value
+     * at that index to the current value of count so that all
+     * vertexes on the linked list will have the same count value.
+     *
+     * Notice that the process above is also carried out on the child
+     * vertex of vertex on the linked list and they will all have
+     * same count value. This is all the vertexes that are directly or
+     * indirectly connected to the first node on the graph will marked
+     * as one thus forming a connected component.
+     *
+     */
     private boolean[] marked;
     private int[] id;
     private int count;
