@@ -123,7 +123,6 @@ class DepthFirstPath{
         dfs(graph, targetVertex);
         System.out.println("marked; " + Arrays.toString(marked));
         System.out.println("edgeTo; " + Arrays.toString(edgeTo));
-
     }
 
     public void dfs(Graph graph, int vertex){
@@ -137,7 +136,6 @@ class DepthFirstPath{
          * connected can be known.
          *
          */
-
         marked[vertex] = true;
         for (int currentVertex: graph.adj(vertex)) {
             if(!marked[currentVertex]){
@@ -161,11 +159,12 @@ class DepthFirstPath{
          * broken, push the reference vertex to the stack.
          *
          * Notice here that we first of all ensure that both vertexes are
-         * connected and then we create a stack to store the path.
+         * connected, and then we create a stack to store the path.
          */
         if(!hasPathTo(v)) {
             return null;
         }
+
         Stack<Integer> path = new Stack<>();
         for (int i = v; i != targetVertex; i = edgeTo[i]){
             path.push(i);
@@ -174,7 +173,6 @@ class DepthFirstPath{
         return path;
     }
 }
-
 class ConnectedComponents{
     /*
      * Here we take the graph as argument and for each vertex
@@ -217,8 +215,6 @@ class ConnectedComponents{
         }
     }
 }
-
-
 class Graph{
     private final int V;
     private LinkedList<Integer>[] adj;
