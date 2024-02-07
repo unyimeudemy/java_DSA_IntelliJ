@@ -1,34 +1,41 @@
 package RWayTries;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Tries {
+//    public static void main(String[] args) {
+//        TriesST<Integer> trie = new TriesST<Integer>();
+//
+//        // Insert data
+//        trie.put("apple", 1);
+//        trie.put("app", 2);
+//        trie.put("banana", 3);
+//        trie.put("bat", 4);
+//
+//        // Test contains
+//        System.out.println("Contains 'apple': " + trie.contains("apple")); // Should be true
+//        System.out.println("Contains 'apricot': " + trie.contains("apricot")); // Should be false
+//
+//        // Test get
+//        System.out.println("Get 'apple': " + trie.get("apple")); // Should be 1
+//        System.out.println("Get 'app': " + trie.get("app")); // Should be 2
+//        System.out.println("Get 'banana': " + trie.get("banana")); // Should be 3
+//        System.out.println("Get 'batman': " + trie.get("batman")); // Should be null
+//
+//        // Test delete
+//        trie.delete("app");
+//        System.out.println("After deleting 'app', contains 'app': " + trie.contains("app")); // Should be false
+//        System.out.println("After deleting 'app', get 'apple': " + trie.get("apple")); // Should be 1
+//
+//        // Additional tests
+//        trie.put("batman", 5);
+//        System.out.println("Contains 'batman': " + trie.contains("batman")); // Should be true
+//        System.out.println("Get 'batman': " + trie.get("batman")); // Should be 5
+//    }
+
     public static void main(String[] args) {
-        TriesST<Integer> trie = new TriesST<Integer>();
-
-        // Insert data
-        trie.put("apple", 1);
-        trie.put("app", 2);
-        trie.put("banana", 3);
-        trie.put("bat", 4);
-
-        // Test contains
-        System.out.println("Contains 'apple': " + trie.contains("apple")); // Should be true
-        System.out.println("Contains 'apricot': " + trie.contains("apricot")); // Should be false
-
-        // Test get
-        System.out.println("Get 'apple': " + trie.get("apple")); // Should be 1
-        System.out.println("Get 'app': " + trie.get("app")); // Should be 2
-        System.out.println("Get 'banana': " + trie.get("banana")); // Should be 3
-        System.out.println("Get 'batman': " + trie.get("batman")); // Should be null
-
-        // Test delete
-        trie.delete("app");
-        System.out.println("After deleting 'app', contains 'app': " + trie.contains("app")); // Should be false
-        System.out.println("After deleting 'app', get 'apple': " + trie.get("apple")); // Should be 1
-
-        // Additional tests
-        trie.put("batman", 5);
-        System.out.println("Contains 'batman': " + trie.contains("batman")); // Should be true
-        System.out.println("Get 'batman': " + trie.get("batman")); // Should be 5
+        TriesST.cc();
     }
 }
 
@@ -100,5 +107,39 @@ class TriesST<Value>{
         if(x.value == null && x.next[c] == null){
             x.next[c] = null;
         }
+    }
+
+    public Iterable<String> keys (){
+        Queue<String> queue = new LinkedList<>();
+        collect(root, "", queue);
+        return queue;
+    }
+
+    private void collect(Node x, String prefix, Queue<String> q){
+        if(x == null){return;}
+        if(x.value != null){q.add(prefix);}
+        for (int c = 0; c < R; c++) {
+            collect(x.next[c], prefix + c, q);
+        }
+    }
+
+    public Iterable<String> KeysWithPrefix(String prefix){
+        Queue<String> queue = new LinkedList<>();
+        Node x = get(root, prefix, 0);
+        collect(x, prefix, queue);
+        return queue;
+    }
+
+
+    static void cc(){
+        String ss = "a";
+        cc(ss);
+        System.out.println(ss);
+    }
+    static void cc(String prefix) {
+        if (prefix.length() == 10) return;
+        String c = "k";
+        cc(prefix + c);  // Recursive call
+        System.out.println(prefix);
     }
 }

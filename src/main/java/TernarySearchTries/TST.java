@@ -23,8 +23,8 @@ public class TST {
 
         // Test delete
 //        trie.delete("app");
-        System.out.println("After deleting 'app', contains 'app': " + trie.contains("app")); // Should be false
-        System.out.println("After deleting 'app', get 'apple': " + trie.get("apple")); // Should be 1
+//        System.out.println("After deleting 'app', contains 'app': " + trie.contains("app")); // Should be false
+//        System.out.println("After deleting 'app', get 'apple': " + trie.get("apple")); // Should be 1
 
         // Additional tests
         trie.put("batman", 5);
